@@ -86,52 +86,56 @@ let btnEl;
 
 container.addEventListener('click' , handleClicking)
 
-
+let presscount = 0;
 
 function handleClicking(event){
-    if (event.target.id !== 'imagesSection') {
-      for (let Clicks = 0; Clicks < product.all.length; Clicks++)
-    Clicks++;
-    if(rounds >= Clicks){
+  presscount++;
+      
+
+
+
+
+
+    if(rounds >= presscount){
         if(event.target.id === 'firstImage'){
-          Product.Product.all[firstImage].votes++;
+          product.all[firstImage].votes++;
         }else if(event.target.id ==='secondImage'){
-          Product.Product.all[secondImage].votes++;
+          product.all[secondImage].votes++;
         }
         else if(event.target.id ==='lastImage'){
-          Product.Product.all[lastImage].votes++;
+          product.all[lastImage].votes++;
         }else{
-          countsClick--;
+          
           return
         }
         displayImages();
-
-        container.removeEventListener('click' , handleClicking)
-
-    }else{  
+      }
+     
+    else{  
     btnEl = document.getElementById('results');
     btnEl.addEventListener('click',handleShowing);
     gettingList();
     container.removeEventListener('click',handleClicking);
     }
-
+  }
     function handleShowing(){
       gettingList()
         
 
 
     }
-
+    let ul = document.getElementById('resultsList');
+    let li;
 
     function gettingList(){
 
-      let ul = document.getElementById('resultsList')
-      for(let i = 0 ; i < product.all.length; i++)
-      let li = document.createElement('li');
+      for(let i = 0 ; i < product.all.length; i++){
+       li = document.createElement('li');
       ul.appendChild(li);
-      li.textContent = product.all[i].Name + 'has' + product.all[i].votes +'votes'
+      li.textContent = product.all[i].Name + 'has' + product.all[i].votes +'votes';
+      }
     }
-  }
   
-}
+  
+
  console.log(product.all);
